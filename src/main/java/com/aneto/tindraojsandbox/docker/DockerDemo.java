@@ -10,6 +10,9 @@ import com.github.dockerjava.api.model.PullResponseItem;
 import com.github.dockerjava.core.DockerClientBuilder;
 import com.github.dockerjava.core.command.LogContainerResultCallback;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class DockerDemo {
     public static void main(String[] args) throws InterruptedException {
         DockerClient dockerClient = DockerClientBuilder.getInstance().build();

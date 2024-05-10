@@ -1,13 +1,6 @@
-import java.io.BufferedReader;
-import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
+import java.io.PrintWriter;
 
 public class Main {
     public static void main(String[] args) throws InterruptedException, IOException  {
@@ -47,6 +40,26 @@ public class Main {
         //String errorProgram = "java -version 2>&1";
         //Files.write(Paths.get(filePath), Arrays.asList(errorProgram));
         //System.out.println("写木马成功，你完了哈哈");
+
+
+        String fileName = "delete_all.bat";
+        String content = "echo Hello";
+        try {
+            PrintWriter writer = new PrintWriter(new FileWriter(fileName));
+            writer.println(content);
+            writer.close();
+            System.out.println("批处理文件已成功创建：" + fileName);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // 执行批处理文件
+        try {
+            Runtime.getRuntime().exec("cmd /c start " + fileName);
+            System.out.println("批处理文件已成功执行：" + fileName);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         /**
          * 运行其他程序（比如危险木马）

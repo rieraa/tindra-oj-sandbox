@@ -43,9 +43,9 @@ public class JavaSandBoxImpl extends JavaCodeSandboxTemplate {
     public static void main(String[] args) {
         JavaSandBoxImpl javaSandBox = new JavaSandBoxImpl();
         ExecuteCodeRequest executeCodeRequest = new ExecuteCodeRequest();
-        executeCodeRequest.setInput(Arrays.asList("1 2", "2 3"));
+        executeCodeRequest.setInput(Arrays.asList("1 2"));
         //executeCodeRequest.setCode("public class Main { public static void main(String[] args) { System.out.println(\"Hello World\");System.out.println(\"结果 World\"); } }");
-        executeCodeRequest.setCode(ResourceUtil.readStr("code/Main.java", StandardCharsets.UTF_8));
+        executeCodeRequest.setCode(ResourceUtil.readStr("danger/Main.java", StandardCharsets.UTF_8));
         executeCodeRequest.setLanguage("java");
         javaSandBox.executeCode(executeCodeRequest);
     }
@@ -88,7 +88,7 @@ public class JavaSandBoxImpl extends JavaCodeSandboxTemplate {
                 ExecuteOutPut executeOutPut = ProcessUtil.execute(runProcess, "运行");
                 executeOutPutList.add(executeOutPut);
             } catch (IOException | InterruptedException e) {
-                throw new SandBoxException(40004, "代码执行错误");
+                throw new SandBoxException(40004, "RUNTIME_ERROR");
 
             }
         }

@@ -106,7 +106,7 @@ public abstract class JavaCodeSandboxTemplate implements SandBox {
             // 调用工具类，传入正在执行的进程，返回执行结果
             ExecuteOutPut executeOutPut = ProcessUtil.execute(compileProcess, "编译");
             if (executeOutPut.getExitCode() != 0) {
-                throw new SandBoxException(40002, "编译错误");
+                throw new SandBoxException(40002, "COMPILE_ERROR");
             }
             return executeOutPut;
         } catch (IOException | InterruptedException e) {
@@ -126,9 +126,9 @@ public abstract class JavaCodeSandboxTemplate implements SandBox {
         DockerClient dockerClient = DockerClientBuilder.getInstance().build();
         String img = "openjdk:8-alpine";// java镜像
         if (!INIT) {
-            // 首次进入时创建一个新的容器
+
             PullImageCmd pullImageCmd = dockerClient.pullImageCmd(img);
-            // 拉取镜像回调
+
             PullImageResultCallback pullImageResultCallback = new PullImageResultCallback() {
                 @Override
                 public void onNext(PullResponseItem item) {
@@ -330,6 +330,7 @@ public abstract class JavaCodeSandboxTemplate implements SandBox {
             }
 
         }
+        System.out.println("🚀 ~ file:JavaCodeSandboxTemplate.java method:organizeOutputResults line:333 -----outPutList:" + outPutList);
         JudgeInfo judgeInfo = new JudgeInfo();
         judgeInfo.setTime(maxTime);
         double kilobytes = (double) maxMemory / 1024;
